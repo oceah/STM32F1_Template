@@ -1,0 +1,152 @@
+version: "4.1"
+name: STM32F1
+type: ARM
+deviceName: null
+packDir: null
+srcDirs:
+  - Drivers/CMSIS/STM32F1xx/Source
+  - Drivers/STM32F1xx_HAL_Driver/Src
+  - Drivers/CMSIS/startup
+  - User/sys/src
+  - User/periph/src
+  - User/dev/src
+virtualFolder:
+  name: <virtual_root>
+  files:
+    - path: User/main.cpp
+  folders: []
+dependenceList: []
+outDir: build
+miscInfo:
+  uid: 89591294997d48b4696b377e9c758493
+targets:
+  Debug:
+    cppPreprocessAttrs:
+      defineList:
+        - STM32F103xB
+      incList:
+        - Drivers/CMSIS/STM32F1xx/Include
+        - Drivers/STM32F1xx_HAL_Driver/Inc
+        - Drivers/STM32F1xx_HAL_Driver/Inc/Legacy
+        - Drivers/Core
+        - User/sys/inc
+        - User/periph/inc
+        - User/dev/inc
+      libList: []
+    excludeList:
+      - Drivers/CMSIS/startup/arm/startup_stm32f100xb.s
+      - Drivers/CMSIS/startup/arm/startup_stm32f100xe.s
+      - Drivers/CMSIS/startup/arm/startup_stm32f101x6.s
+      - Drivers/CMSIS/startup/arm/startup_stm32f101xb.s
+      - Drivers/CMSIS/startup/arm/startup_stm32f101xe.s
+      - Drivers/CMSIS/startup/arm/startup_stm32f101xg.s
+      - Drivers/CMSIS/startup/arm/startup_stm32f102x6.s
+      - Drivers/CMSIS/startup/arm/startup_stm32f103xe.s
+      - Drivers/CMSIS/startup/arm/startup_stm32f103xg.s
+      - Drivers/CMSIS/startup/arm/startup_stm32f105xc.s
+      - Drivers/CMSIS/startup/arm/startup_stm32f107xc.s
+      - Drivers/CMSIS/startup/arm/startup_stm32f102xb.s
+      - Drivers/CMSIS/startup/arm/startup_stm32f103x6.s
+      - Drivers/CMSIS/startup/gcc
+    toolchain: AC6
+    toolchainConfigMap:
+      AC6:
+        archExtensions: ""
+        cpuType: Cortex-M3
+        floatingPointHardware: none
+        options:
+          version: 3
+          afterBuildTasks: []
+          asm-compiler:
+            $use: asm-auto
+          beforeBuildTasks: []
+          c/cpp-compiler:
+            language-c: c17
+            language-cpp: c++17
+            optimization: level-0
+            turn-Warning-into-errors: true
+            warnings: ac5-like-warnings
+          global:
+            output-debug-info: enable
+          linker:
+            $outputTaskExcludes:
+              - .bin
+            misc-controls: --diag_suppress=L6329
+            output-format: elf
+        scatterFilePath: <YOUR_SCATTER_FILE>.sct
+        storageLayout:
+          RAM:
+            - id: 1
+              isChecked: true
+              mem:
+                size: "0x5000"
+                startAddr: "0x20000000"
+              noInit: false
+              tag: IRAM
+          ROM:
+            - id: 1
+              isChecked: true
+              isStartup: true
+              mem:
+                size: "0x10000"
+                startAddr: "0x08000000"
+              tag: IROM
+        useCustomScatterFile: false
+      GCC:
+        archExtensions: ""
+        cpuType: Cortex-M3
+        floatingPointHardware: none
+        options:
+          version: 5
+          afterBuildTasks: []
+          asm-compiler:
+            ASM_FLAGS: ""
+          beforeBuildTasks: []
+          c/cpp-compiler:
+            CXX_FLAGS: ""
+            C_FLAGS: ""
+            language-c: c11
+            language-cpp: c++11
+            one-elf-section-per-data: true
+            one-elf-section-per-function: true
+            optimization: level-debug
+            warnings: all-warnings
+          global:
+            $float-abi-type: hard
+            misc-control: ""
+            not-use-syscalls: true
+            output-debug-info: enable
+            use-newlib-nano: true
+          linker:
+            $outputTaskExcludes:
+              - .bin
+            LD_FLAGS: ""
+            LIB_FLAGS: -lm
+            output-format: elf
+            remove-unused-input-sections: true
+        scatterFilePath: <YOUR_LINKER_SCRIPT>.lds
+        storageLayout:
+          RAM: []
+          ROM: []
+        useCustomScatterFile: true
+    uploadConfigMap:
+      JLink:
+        baseAddr: ""
+        bin: ""
+        cpuInfo:
+          cpuName: "null"
+          vendor: "null"
+        otherCmds: ""
+        proType: 1
+        speed: 8000
+      STLink:
+        address: "0x08000000"
+        bin: ""
+        elFile: None
+        optionBytes: .eide/debug.st.option.bytes.ini
+        otherCmds: ""
+        proType: SWD
+        resetMode: default
+        runAfterProgram: true
+        speed: 4000
+    uploader: STLink
