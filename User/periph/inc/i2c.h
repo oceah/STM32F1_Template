@@ -15,7 +15,7 @@ public:
      * @param p pointer of data
      * @param size bytes of data
      */
-    void read(uint8_t dev_addr, uint8_t mem_addr, uint8_t *p, uint16_t size);
+    void read(uint8_t dev_addr, uint8_t mem_addr, void *p, uint16_t size);
 
     /**
      * @brief write data sized 'size' from 'p' to 'dev_addr:mem_addr'
@@ -24,7 +24,7 @@ public:
      * @param p pointer of data
      * @param size bytes of data
      */
-    void write(uint8_t dev_addr, uint8_t mem_addr, const uint8_t *p, uint16_t size);
+    void write(uint8_t dev_addr, uint8_t mem_addr, const void *p, uint16_t size);
 
 private:
     GPIO_PinType &SCL;

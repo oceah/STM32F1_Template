@@ -247,8 +247,8 @@ void OLED12864IIC::print(char chr)
 
 void OLED12864IIC::print(const char *str)
 {
-    for (uint8_t i = 0; str[i] != '\0'; i++)
-        print(str[i]);
+    while (*str != '\0')
+        print(*str++);
 }
 
 void OLED12864IIC::putimg(const uint8_t *img)

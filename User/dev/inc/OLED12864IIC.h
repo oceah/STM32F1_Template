@@ -32,4 +32,4 @@ private:
     void set_cursor(uint8_t x, uint8_t y);
 };
 
-#endif // OLED12864IIC
+#endif // _OLED12864IIC_H

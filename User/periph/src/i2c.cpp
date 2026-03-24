@@ -80,27 +80,9 @@ uint8_t I2C::rx_ack()
     return ack;
 }
 
-void I2C::write(uint8_t dev_addr, uint8_t mem_addr, const uint8_t *p, uint16_t size)
+void I2C::read(uint8_t dev_addr, uint8_t mem_addr, void *p_, uint16_t size)
 {
-    // send start signal
-    start();
-    // send device address
-    tx_byte(dev_addr);
-    rx_ack();
-    // send device register address
-    tx_byte(mem_addr);
-    rx_ack();
-    // send data
-    while (size--) {
-        tx_byte(*p++);
-        rx_ack();
-    }
-    // send stop signal
-    stop();
-}
-
-void I2C::read(uint8_t dev_addr, uint8_t mem_addr, uint8_t *p, uint16_t size)
-{
+    auto p = static_cast<uint8_t *>(p_);
     // send start signal
     start();
     // send device address
@@ -124,5 +106,25 @@ void I2C::read(uint8_t dev_addr, uint8_t mem_addr, uint8_t *p, uint16_t size)
     *p = rx_byte();
     tx_ack(1);
     // send termination signal
+    stop();
+}
+
+void I2C::write(uint8_t dev_addr, uint8_t mem_addr, const void *p_, uint16_t size)
+{
+    auto p = static_cast<const uint8_t *>(p_);
+    // send start signal
+    start();
+    // send device address
+    tx_byte(dev_addr);
+    rx_ack();
+    // send device register address
+    tx_byte(mem_addr);
+    rx_ack();
+    // send data
+    while (size--) {
+        tx_byte(*p++);
+        rx_ack();
+    }
+    // send stop signal
     stop();
 }
