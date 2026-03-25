@@ -91,7 +91,7 @@ bool I2C::ping(uint8_t dev_addr)
     return ack;
 }
 
-void I2C::read(uint8_t dev_addr, uint8_t mem_addr, void *p_, uint16_t size)
+void I2C::read(uint8_t dev_addr, uint8_t mem_addr, void *p_, uint32_t size)
 {
     auto p = static_cast<uint8_t *>(p_);
     // send start signal
@@ -120,7 +120,7 @@ void I2C::read(uint8_t dev_addr, uint8_t mem_addr, void *p_, uint16_t size)
     stop();
 }
 
-void I2C::write(uint8_t dev_addr, uint8_t mem_addr, const void *p_, uint16_t size)
+void I2C::write(uint8_t dev_addr, uint8_t mem_addr, const void *p_, uint32_t size)
 {
     auto p = static_cast<const uint8_t *>(p_);
     // send start signal
