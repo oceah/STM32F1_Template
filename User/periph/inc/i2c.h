@@ -9,6 +9,12 @@ public:
     I2C(GPIO_PinType &SCL, GPIO_PinType &SDA_I, GPIO_PinType &SDA_O);
 
     /**
+     * @brief ping device at dev_addr
+     * @return true if success else false
+     */
+    bool ping(uint8_t dev_addr);
+
+    /**
      * @brief read data sized 'size' from 'dev_addr:mem_addr' to 'p'
      * @param dev_addr 7 bit device address << 1
      * @param mem_addr device register address

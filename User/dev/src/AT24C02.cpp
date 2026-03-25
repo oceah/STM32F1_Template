@@ -7,10 +7,14 @@ AT24C02::AT24C02(I2C *i2c, uint8_t A)
 
 void AT24C02::write(uint8_t mem_addr, uint8_t byte)
 {
-    i2c->write(AT24C02_DevAddr | A, mem_addr, &byte, 1);
+    uint8_t dev_addr = AT24C02_DevAddr | A;
+    while (!i2c->ping(dev_addr));
+    i2c->write(dev_addr, mem_addr, &byte, 1);
 }
 
 void AT24C02::read(uint8_t mem_addr, void *p, uint8_t size)
 {
-    i2c->read(AT24C02_DevAddr | A, mem_addr, p, size);
+    uint8_t dev_addr = AT24C02_DevAddr | A;
+    while (!i2c->ping(dev_addr));
+    i2c->read(dev_addr, mem_addr, p, size);
 }

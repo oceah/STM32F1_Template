@@ -80,6 +80,17 @@ uint8_t I2C::rx_ack()
     return ack;
 }
 
+bool I2C::ping(uint8_t dev_addr)
+{
+    // send start signal
+    start();
+    // send device address
+    tx_byte(dev_addr);
+    bool ack = rx_ack() == 0;
+    stop();
+    return ack;
+}
+
 void I2C::read(uint8_t dev_addr, uint8_t mem_addr, void *p_, uint16_t size)
 {
     auto p = static_cast<uint8_t *>(p_);
