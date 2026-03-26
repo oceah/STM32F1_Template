@@ -37,17 +37,17 @@ private:
     GPIO_PinType &SDA_I;
     GPIO_PinType &SDA_O;
 
-    inline void set_scl(uint8_t bit);
-    inline void set_sda(uint8_t bit);
-    inline uint8_t get_sda();
+    void set_scl(uint8_t bit);
+    void set_sda(uint8_t bit);
+    uint8_t get_sda();
 
-    inline void start();
-    inline void stop();
+    void start();
+    void stop();
 
-    inline void tx_byte(uint8_t byte);
-    inline uint8_t rx_byte();
-    inline void tx_ack(uint8_t bit);
-    inline uint8_t rx_ack();
+    void tx_byte(uint8_t byte);
+    uint8_t rx_byte();
+    void tx_ack(uint8_t bit);
+    uint8_t rx_ack();
 };
 
 #endif
